@@ -95,4 +95,22 @@ function sdc.clear(display)
 	end
 end
 
+function sdc.color(display, color, group, index)
+	if group == -1 then
+		for i=1, 4 do
+			if index == -1 then
+					for j=1, 8 do display.Colors[i][j] = color end
+			else
+					display.Colors[i][index] = color
+			end
+		end
+	else
+		if index == -1 then
+					for j=1, 8 do display.Colors[group][j] = color end
+			else
+					display.Colors[group][index] = color
+			end
+	end
+end
+
 return sdc
