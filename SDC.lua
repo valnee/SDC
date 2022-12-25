@@ -61,7 +61,7 @@ function sdc.write(display, num : string, start : number)
 	local group = start or 1
 	local length = #num
 	while counter < length do
-		if group > 4 then print("GROUP INDEX REACHED MORE THAN 4, ABORTING") break end
+		if group > #display.States then print("GROUP INDEX REACHED MORE THAN GROUP NUMBER, ABORTING") break end
 		counter = counter + 1
 		local char = num:sub(counter, counter)
 		
@@ -97,7 +97,7 @@ end
 
 function sdc.color(display, color, group, index)
 	if group == -1 then
-		for i=1, 4 do
+		for i=1, #display.States do
 			if index == -1 then
 					for j=1, 8 do display.Colors[i][j] = color end
 			else
