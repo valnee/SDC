@@ -62,7 +62,6 @@ function sdc.write(display, num : string, start : number)
 	local length = #num
 	while counter < length do
 		if group > #display.States then
-			print("GROUP INDEX REACHED MORE THAN GROUP NUMBER, ABORTING")
 			break
 		end
 		counter = counter + 1
