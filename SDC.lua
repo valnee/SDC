@@ -61,7 +61,10 @@ function sdc.write(display, num : string, start : number)
 	local group = start or 1
 	local length = #num
 	while counter < length do
-		if group > #display.States then print("GROUP INDEX REACHED MORE THAN GROUP NUMBER, ABORTING") break end
+		if group > #display.States then
+			print("GROUP INDEX REACHED MORE THAN GROUP NUMBER, ABORTING")
+			break
+		end
 		counter = counter + 1
 		local char = num:sub(counter, counter)
 		
@@ -81,7 +84,6 @@ function sdc.write(display, num : string, start : number)
 				display.States[group][t[i]] = true
 			end
 		end
-		
 		group = group + 1
 	end
 end
