@@ -1,6 +1,6 @@
 local sdc = {}
 
-local LookTable = {
+local Nums = {
 	[0] = {1,2,3,4,5,6},
 	{2,3}, -- 1
 	{1,2,4,5,7}, -- 2
@@ -13,11 +13,55 @@ local LookTable = {
 	{1,2,3,4,6,7}, -- 9
 }
 
+local Chars = {
+	["a"] = {1,2,3,5,6,7},
+	["A"] = {1,2,3,5,6,7},
+	["b"] = {3,4,5,6,7},
+	["B"] = {3,4,5,6,7}, --{1,2,3,4,5,6,7},
+	["c"] = {4,5,7},
+	["C"] = {1,4,5,6},
+	["d"] = {2,3,4,5,7},
+	["D"] = {2,3,4,5,7},
+	["e"] = {1,2,4,5,6,7},
+	["E"] = {1,4,5,6,7},
+	["f"] = {1,5,6,7},
+	["F"] = {1,5,6,7},
+	["g"] = {1,2,3,4,6,7},
+	["G"] = {1,3,4,5,6},
+	["h"] = {3,5,6,7},
+	["H"] = {2,3,5,6,7},
+	["i"] = {1,3},
+	["I"] = {2,3},
+	["j"] = {1,3,4},
+	["J"] = {1,3,4},
+	["l"] = {4,5,6},
+	["L"] = {4,5,6},
+	["n"] = {3,5,7},
+	["N"] = {1,2,3,5,6},
+	["o"] = {3,4,5,7},
+	["O"] = {1,2,3,4,5,6},
+	["p"] = {1,2,5,6,7},
+	["P"] = {1,2,5,6,7},
+	["q"] = {1,2,3,6,7},
+	["Q"] = {1,2,3,6,7},
+	["r"] = {5,7},
+	["R"] = {5,7},
+	["s"] = {1,3,4,6,7},
+	["S"] = {1,3,4,6,7},
+	["t"] = {4,5,6,7},
+	["T"] = {4,5,6,7},
+	["u"] = {3,4,5},
+	["U"] = {2,3,4,5,6},
+	["y"] = {2,3,6,7},
+	["Y"] = {2,3,6,7},
+}
+
 function sdc.write(display, num : string, start : number)
 	local counter = 0
 	local group = start or 1
 	local length = #num
 	while counter < length do
+		if group > 4 then print("GROUP INDEX REACHED MORE THAN 4, ABORTING") break end
 		counter = counter + 1
 		local char = num:sub(counter, counter)
 		
@@ -26,9 +70,16 @@ function sdc.write(display, num : string, start : number)
 			continue
 		end
 		
-		local t = LookTable[tonumber(char)]
-		for i=1, #t do
-			display.States[group][t[i]] = true
+		if tonumber(char) then
+			local t = Nums[tonumber(char)]
+			for i=1, #t do
+				display.States[group][t[i]] = true
+			end
+		else
+			local t = Chars[char] or Nums[0]
+			for i=1, #t do
+				display.States[group][t[i]] = true
+			end
 		end
 		
 		group = group + 1
