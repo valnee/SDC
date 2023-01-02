@@ -71,10 +71,6 @@ function sdc.write(display, num : string, start : number)
 			display.States[group-1][8] = true
 			continue
 		end
-		if nchar == "." or nchar == "," then
-			display.States[group][8] = true
-			continue
-		end
 		
 		if tonumber(char) then
 			local t = Nums[tonumber(char)]
