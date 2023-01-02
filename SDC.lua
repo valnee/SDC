@@ -66,9 +66,13 @@ function sdc.write(display, num : string, start : number)
 		end
 		counter = counter + 1
 		local char = num:sub(counter, counter)
-		
+		local nchar = num:sub(counter+1, counter+1)
 		if char == "." or char == "," then
 			display.States[group-1][8] = true
+			continue
+		end
+		if nchar == "." or nchar == "," then
+			display.States[group][8] = true
 			continue
 		end
 		
