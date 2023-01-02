@@ -88,7 +88,7 @@ function sdc.write(display, num : string, start : number)
 end
 
 function sdc.clear(display)
-	for i=1, 4 do
+	for i=1, #display.States do
 		local n = display.States[i]
 		for j=1, #n do
 			n[j] = false	
